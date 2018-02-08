@@ -32,8 +32,7 @@ process.on('message', msg => {
       launch(...msg.params)
       break
     case 'freeze': // debug freeze time
-      let i = 1000000000
-      while (i--) true
+      while (msg.i--) msg.i--
       break
     default:
       console.error('SleepTime2 IPC error: Unknown msg type %s', msg.type)
