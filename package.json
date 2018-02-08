@@ -1,6 +1,6 @@
 {
   "name": "sleeptime2",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Detects when the system wakes up from standby",
   "main": "src/index.js",
   "scripts": {
