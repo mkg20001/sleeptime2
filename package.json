@@ -40,5 +40,8 @@
   "bugs": {
     "url": "https://github.com/mkg20001/sleeptime2/issues"
   },
-  "homepage": "https://github.com/mkg20001/sleeptime2#readme"
+  "homepage": "https://github.com/mkg20001/sleeptime2#readme",
+  "contributors": [
+    "mkg20001 <mkg20001@gmail.com>"
+  ]
 }
