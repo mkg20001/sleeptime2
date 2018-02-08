@@ -6,6 +6,12 @@ const debug = require('debug')
 const log = debug('sleeptime2')
 
 class SleepTime2 {
+  /**
+    Detects when the system wakes up from standby
+    @param {Function} onNotify - Function called as `onNotify(diff, now)` if the time difference between the last check and now is bigger than maxDiff
+    @param {Number} maxDiff - Amount of milliseconds that the machine needs to be asleep for the event to trigger
+    @returns {undefined}
+    */
   constructor (onNotify, maxDiff) {
     if (typeof onNotify !== 'function') throw new TypeError('Expected onNotify to be function!')
     log('new SleepTime2(<Function>, %s)', maxDiff)
@@ -14,6 +20,11 @@ class SleepTime2 {
     this.start()
   }
 
+  /**
+    Spawns a fork that watches the time
+    Automatically called after creation
+    @returns {undefined}
+    */
   start () {
     if (this._forked) return
     this._forked = cp.fork(path.join(__dirname, 'child.js'))
@@ -22,6 +33,10 @@ class SleepTime2 {
     log('forked to %s', this._forked.pid)
   }
 
+  /**
+    Kills the fork if any is running
+    @returns {undefined}
+    */
   stop () {
     if (!this._forked) return
     this._forked.kill()
