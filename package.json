@@ -4,7 +4,14 @@
   "description": "Detects when the system wakes up from standby",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "aegir lint -t node",
+    "build": "aegir build -t node",
+    "test": "aegir test -t node",
+    "release": "aegir release -t node",
+    "release-minor": "aegir release --type minor -t node",
+    "release-major": "aegir release --type major -t node",
+    "coverage": "aegir coverage",
+    "coverage-publish": "aegir coverage -u"
   },
   "keywords": [
     "standby",

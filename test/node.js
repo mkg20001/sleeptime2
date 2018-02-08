@@ -10,18 +10,21 @@ chai.use(dirtyChai)
 const st2 = require('../src')
 
 describe('sleeptime2', () => {
-
   let timer
 
   it('should create the forked process properly', () => {
-    timer = new st2(console.log)
+    timer = new st2(console.log, 1000)
     expect(timer._forked).to.exist()
     expect(typeof timer._forked.pid).to.equal('number') // TODO: use real chai typeOf
+  })
+
+  it('should trigger correctly', done => {
+    timer.onNotify = () => done()
+    timer._forked.send({type: 'freeze'})
   })
 
   it('should kill the forked process properly', () => {
     timer.stop()
     expect(timer._forked).to.not.exist()
   })
-
 })

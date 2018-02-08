@@ -13,7 +13,7 @@ function check (maxDiff) {
   if (diff > maxDiff && !lastDidTrigger) {
     process.send({diff, now})
     lastDidTrigger = true
-    log('triggerd (%s > %s)', diff, maxDiff)
+    log('triggered (%s > %s)', diff, maxDiff)
     return
   }
   lastDidTrigger = false
@@ -25,4 +25,17 @@ function launch (i) {
   setInterval(check.bind(null, i), i / 2)
 }
 
-process.on('message', launch)
+process.on('message', msg => {
+  log('ipc %s', msg.type)
+  switch (msg.type) {
+    case 'launch':
+      launch(...msg.params)
+      break
+    case 'freeze': // debug freeze time
+      let i = 1000000000
+      while (i--) true
+      break
+    default:
+      console.error('SleepTime2 IPC error: Unknown msg type %s', msg.type)
+  }
+})
